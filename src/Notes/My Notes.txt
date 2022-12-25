@@ -14,3 +14,13 @@
         Only one instance of a class exists at a time.
     Factory Design Pattern
         Separate method for creating an object
+
+5) Checkpoint class - can use soft assert as well.
+    Run through entire test and capture all the assertion failures.
+    If there is a single assertion failure also, fail the test method.
+    If all the assertions pass, then mark the test method as pass
+
+    The first few assert statements of the test method can use mark() method in CheckPoint Class
+    The final assert must use markAll() method in Checkpoint class
+
+    The advantage of this over soft assert is the proper logging message.
