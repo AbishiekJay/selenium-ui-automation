@@ -10,8 +10,8 @@ public class Util {
 
     /***
      * Sleep for specified number of milliseconds
-     * @param msec
-     * @param info
+     * @param msec - Milliseconds for wait
+     * @param info - description for sleep
      */
     public static void sleep(long msec, String info) {
         if (info != null) {
@@ -26,7 +26,7 @@ public class Util {
 
     /***
      * Sleep for specified number of milliseconds
-     * @param msec
+     * @param msec - Milliseconds for wait
      */
     public static void sleep(long msec) {
         sleep(msec, null);
@@ -34,8 +34,8 @@ public class Util {
 
     /***
      * Get Random number within specified range
-     * @param min
-     * @param max
+     * @param min - Minimum value (lower bound)
+     * @param max - Maximum value (upper bound)
      * @return a random number
      */
     public static int getRandomNumber(int min, int max) {
@@ -48,7 +48,7 @@ public class Util {
 
     /***
      * Get Random number within specified range
-     * @param number
+     * @param number - Maximum value (upper bound)
      * @return a random number
      */
     public static int getRandomNumber(int number) {
@@ -57,7 +57,7 @@ public class Util {
 
     /***
      * Get random unique string with specified length
-     * @param length
+     * @param length - Length of the string
      * @return a unique string
      */
     public static String getRandomString(int length) {
@@ -135,7 +135,7 @@ public class Util {
      * Checks whether actual string matches with expected string and prints both in log
      * @param actualText - actual Text picked up from application under Test
      * @param expText - expected Text to be matched with actual text
-     * @return
+     * @return Returns true if the text matches exactly else false
      */
     public static boolean verifyTextMatch(String actualText, String expText) {
         if (actualText.equals(expText)){
@@ -154,14 +154,13 @@ public class Util {
     /**
      * Verify actual list contains items of the expected list
      *
-     * @param actList
-     * @param expList
-     * @return
+     * @param actList - The actual list retrieved
+     * @param expList - The expected list
+     * @return Returns true if actual list contains all the values of expected list, else false
      */
     public static Boolean verifyListContains(List<String> actList, List<String> expList) {
-        int expListSize = expList.size();
-        for (int i = 0; i < expListSize; i++) {
-            if (!actList.contains(expList.get(i))) {
+        for (String s : expList) {
+            if (!actList.contains(s)) {
                 return false;
             }
         }
@@ -171,9 +170,9 @@ public class Util {
 
     /***
      * Verify actual list matches expected list
-     * @param actList
-     * @param expList
-     * @return
+     * @param actList - The actual list retrieved
+     * @param expList - The expected list
+     * @return Returns true if both the lists match, else false
      */
     public static Boolean verifyListMatch(List<String> actList, List<String> expList) {
         boolean found = false;
@@ -183,10 +182,10 @@ public class Util {
             return false;
         }
 
-        for (int i = 0; i < actListSize; i++) {
+        for (String s : actList) {
             found = false;
-            for (int j = 0; j < expListSize; j++) {
-                if (verifyTextMatch(actList.get(i), expList.get(j))) {
+            for (String value : expList) {
+                if (verifyTextMatch(s, value)) {
                     found = true;
                     break;
                 }
@@ -204,8 +203,8 @@ public class Util {
 
     /**
      * Verifies item is present in the list
-     * @param actList
-     * @param item
+     * @param actList - The list in which the search is to be carried out
+     * @param item - The item to be searched
      * @return boolean result
      */
     public static Boolean verifyItemPresentInList(List<String> actList, String item){
@@ -222,10 +221,21 @@ public class Util {
 
     /**
      * Verify if list is in ascending order
-     * @param list
+     * @param list - List
      * @return boolean result
      */
     public static boolean isListAscendingOrder(List<Long> list){
         return Ordering.natural().isOrdered(list);
+    }
+
+    public static String getScreenshotName(String methodName, String browserName) {
+        String localDateTime = getCurrentDateTime();
+        StringBuilder name = new StringBuilder().append(browserName)
+                                                .append("_")
+                                                .append(methodName)
+                                                .append("_")
+                                                .append(localDateTime)
+                                                .append(".png");
+        return name.toString();
     }
 }
