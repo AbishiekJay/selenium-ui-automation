@@ -1,0 +1,11 @@
+1) If a new page is the result of an action then the method should return the Page Object of the new page
+2) Hermetic Test Pattern - Each test class must be completely independent and self-sufficient.
+    The advantages are
+        1) Independent start
+        2) Stable Independent Test methods
+3) Utility methods can be used to get smaller works not related to interaction with webpages. Basically helper functions.
+    For Example: sleep method can be created here because the Thread.sleep() requires the callee function to handle exception.
+    When we create it in util with try catch block, we can just call the util method to use sleep. The code will look cleaner.
+    Other examples like create random string, random number, etc can be a part of util class.
+    utility methods are always static so that it can be called without object creation
+4)

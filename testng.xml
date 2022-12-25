@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="MainTest" >
+        <classes>
+            <class name= "org.abishiek.page.TestClass.HomePageTest">
+                <methods>
+                    <include name="clickAbout"/>
+                </methods>
+
+            </class>
+        </classes>
+    </test>
+</suite>
