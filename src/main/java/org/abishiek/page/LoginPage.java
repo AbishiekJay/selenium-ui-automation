@@ -1,6 +1,6 @@
-package org.abishiek.selenium.page;
+package org.abishiek.page;
 
-import org.abishiek.selenium.base.BasePage;
+import org.abishiek.base.BasePage;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {

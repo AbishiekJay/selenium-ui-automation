@@ -1,4 +1,4 @@
-package org.abishiek.selenium.utilities;
+package org.abishiek.utilities;
 
 import com.google.common.collect.Ordering;
 import java.text.SimpleDateFormat;

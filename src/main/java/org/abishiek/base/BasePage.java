@@ -1,4 +1,4 @@
-package org.abishiek.selenium.base;
+package org.abishiek.base;
 
 import org.openqa.selenium.WebDriver;
 

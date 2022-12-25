@@ -8,4 +8,9 @@
     When we create it in util with try catch block, we can just call the util method to use sleep. The code will look cleaner.
     Other examples like create random string, random number, etc can be a part of util class.
     utility methods are always static so that it can be called without object creation
-4)
+
+4) WebDriver Factory implementation
+    Singleton Design Pattern
+        Only one instance of a class exists at a time.
+    Factory Design Pattern
+        Separate method for creating an object

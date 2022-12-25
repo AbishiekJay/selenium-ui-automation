@@ -1,4 +1,4 @@
-package org.abishiek.page.TestClass;
+package org.abishiek.TestClass;
 
 import org.testng.annotations.Test;
 

@@ -1,10 +1,10 @@
-package org.abishiek.selenium.base;
+package org.abishiek.base;
 
 import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import org.abishiek.selenium.utilities.Util;
+import org.abishiek.utilities.Util;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
