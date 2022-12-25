@@ -3,6 +3,7 @@ package org.abishiek.base;
 import org.abishiek.page.HomePage;
 import org.abishiek.page.LoginPage;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.FileInputStream;
@@ -15,11 +16,12 @@ public class BaseTest {
     private static WebDriver driver;
     private HomePage home;
     private LoginPage login;
-    private String configPath = System.getProperty("user.dir")+"src/main/java/org/abishiek/selenium/config/config.properties";
+    Properties prop;
 
     public BaseTest(){
         try{
-            Properties prop = new Properties();
+            prop = new Properties();
+            String configPath = System.getProperty("user.dir") + "/src/main/java/org/abishiek/config/config.properties";
             FileInputStream inputStream = new FileInputStream(configPath);
             prop.load(inputStream);
         }catch (FileNotFoundException file){
@@ -32,6 +34,12 @@ public class BaseTest {
 
     @BeforeClass
     public void setUp(){
+        driver = WebDriverFactory.getInstance().getDriver(prop.getProperty("browser"));
+        driver.get(prop.getProperty("url"));
+    }
 
+    @AfterClass
+    public void tearDown(){
+        WebDriverFactory.getInstance().quitDriver();
     }
 }
