@@ -507,6 +507,17 @@ public class CustomDriver {
 
     /**
      * @param locator - locator strategy, id=>example, name=>example, css=>#example,
+     *      *      *      *                tag=>example, xpath=>//example, link=>example
+     * @param info - Information about element, usually text on element
+     * @return returns true if submit is successful
+     */
+    public Boolean Submit(String locator, String info) {
+       WebElement element= getElement(locator,info);
+       return Submit(element,info);
+    }
+
+    /**
+     * @param locator - locator strategy, id=>example, name=>example, css=>#example,
      *      *      *                tag=>example, xpath=>//example, link=>example
      * @param attribute - The attribute of the element to be determined
      * @return Returns the value of attribute
