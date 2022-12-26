@@ -4,9 +4,6 @@
     <test name="MainTest" >
         <classes>
             <class name= "org.abishiek.TestClass.HomePageTest">
-                <methods>
-                    <include name="clickAbout"/>
-                </methods>
 
             </class>
         </classes>

@@ -30,7 +30,7 @@ public class CheckPoint {
     /**
      * Keeps the verification point status with testName, Result and Verification Point Message in hash map
      *
-     * @param testName      - The test case name
+     * @param testName      - The test case name or testcase ID
      * @param result        - Verification Result from test method
      * @param resultMessage - Message tagged with verification
      */
@@ -55,7 +55,7 @@ public class CheckPoint {
      * It asserts all the verifications in a test method, if any verification
      * in a test method is failed then the test case is failed
      *
-     * @param testName      - The test case name
+     * @param testName      - The test case name or testcase ID
      * @param result        - Verification Result from test method
      * @param resultMessage - Message tagged with verification
      */
@@ -83,7 +83,7 @@ public class CheckPoint {
         for (int i = 0; i < resultList.size(); i++) {
             if (resultList.contains(FAIL)) {
                 System.out.println("Test Method Failed");
-                Assert.assertTrue(false);
+                Assert.fail();
             } else {
                 System.out.println("Test Method Successful");
                 Assert.assertTrue(true);

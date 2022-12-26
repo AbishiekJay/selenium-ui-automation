@@ -6,7 +6,7 @@
 3) Utility methods can be used to get smaller works not related to interaction with webpages. Basically helper functions.
     For Example: sleep method can be created here because the Thread.sleep() requires the callee function to handle exception.
     When we create it in util with try catch block, we can just call the util method to use sleep. The code will look cleaner.
-    Other examples like create random string, random number, etc can be a part of util class.
+    Other examples like create random string, random number, etc. can be a part of util class.
     utility methods are always static so that it can be called without object creation
 
 4) WebDriver Factory implementation
@@ -21,6 +21,15 @@
     If all the assertions pass, then mark the test method as pass
 
     The first few assert statements of the test method can use mark() method in CheckPoint Class
-    The final assert must use markAll() method in Checkpoint class
-
+    The final assert must use markFinal() method in Checkpoint class
+    Before every method, clear the hashMap ( use @BeforeMethod in BaseTest class annotation for it)
     The advantage of this over soft assert is the proper logging message.
+
+6) Constant Class - A class where all the constants can be places and retrieved as required. Here we use properties file
+
+7) DataProvider - We use MS Excel file for dataProvider. The data format will be in the form of key value pair.
+                    The file extension must be .xlsx
+                    The sheetName must be same as testMethod name
+                    The sheetName(or testMethod Name) can be Testcase ID as well
+                    The filename must be TestData.xlsx
+                    The return type of the dataProvider is Object

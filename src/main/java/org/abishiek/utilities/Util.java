@@ -1,12 +1,16 @@
 package org.abishiek.utilities;
 
 import com.google.common.collect.Ordering;
+
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 public class Util {
+    private static String configPath = System.getProperty("user.dir") + "/src/main/java/org/abishiek/config/config.properties";
 
     /***
      * Sleep for specified number of milliseconds
@@ -169,28 +173,20 @@ public class Util {
     }
 
     /***
-     * Verify actual list matches expected list
+     * Verify actual list matches expected list with re-arranged position
      * @param actList - The actual list retrieved
      * @param expList - The expected list
      * @return Returns true if both the lists match, else false
      */
-    public static Boolean verifyListMatch(List<String> actList, List<String> expList) {
+    public static Boolean verifyListMatchRandIndex(List<String> actList, List<String> expList) {
         boolean found = false;
         int actListSize = actList.size();
         int expListSize = expList.size();
         if (actListSize != expListSize) {
             return false;
         }
-
-        for (String s : actList) {
-            found = false;
-            for (String value : expList) {
-                if (verifyTextMatch(s, value)) {
-                    found = true;
-                    break;
-                }
-            }
-        }
+        expList.removeAll(actList);
+        found = expList.isEmpty();
         if (found) {
             System.out.println("Actual List Matches Expected List !!!");
             return true;
@@ -228,6 +224,12 @@ public class Util {
         return Ordering.natural().isOrdered(list);
     }
 
+    /**
+     *
+     * @param methodName - The method from which the failure occurred
+     * @param browserName - The browser in which the failure occurred
+     * @return Returns the String combining methodName and browserName along-with date and time
+     */
     public static String getScreenshotName(String methodName, String browserName) {
         String localDateTime = getCurrentDateTime();
         StringBuilder name = new StringBuilder().append(browserName)
@@ -238,4 +240,35 @@ public class Util {
                                                 .append(".png");
         return name.toString();
     }
+
+    /**
+     * To store values in run time
+     * @param parameterName -The parameter to be stored in config file
+     * @param parameterValue- The value of parameter to be stored in config file
+     */
+    public static void saveConfigParameter(String parameterName, String parameterValue){
+        Properties prop = new Properties();
+        InputStream fileIn;
+        try {
+            fileIn = new FileInputStream(configPath);
+            prop.load(fileIn);
+            prop.setProperty(parameterName,parameterValue);
+            OutputStream out = new FileOutputStream(configPath);
+            prop.store(out,"");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static String getConfigParameter(String parameterName){
+        Properties prop = new Properties();
+        InputStream fileIn;
+        try {
+            fileIn = new FileInputStream(configPath);
+            prop.load(fileIn);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return prop.getProperty(parameterName);
+    }
+
 }
