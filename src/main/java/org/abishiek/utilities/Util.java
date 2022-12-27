@@ -1,6 +1,9 @@
 package org.abishiek.utilities;
 
 import com.google.common.collect.Ordering;
+import org.abishiek.base.CustomDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -10,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class Util {
+    private static final Logger LOGGER = LogManager.getLogger(Util.class.getName());
     private static String configPath = System.getProperty("user.dir") + "/src/main/java/org/abishiek/config/config.properties";
 
     /***
@@ -19,12 +23,12 @@ public class Util {
      */
     public static void sleep(long msec, String info) {
         if (info != null) {
-            System.out.println("Waiting " + (msec * .001) + " seconds :: " + info);
+            LOGGER.info("Waiting " + (msec * .001) + " seconds :: " + info);
         }
         try {
             Thread.sleep(msec);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
 
@@ -45,7 +49,7 @@ public class Util {
     public static int getRandomNumber(int min, int max) {
         int diff = max - min;
         int randomNum = (int)(min + Math.random() * diff);
-        System.out.println("Random Number :: " + randomNum +
+        LOGGER.info("Random Number :: " + randomNum +
                 " within range :: " + min + " and :: " + max);
         return randomNum;
     }
@@ -72,7 +76,7 @@ public class Util {
             sbuilder.append(chars.charAt(index));
         }
         String randomString = sbuilder.toString();
-        System.out.println("Random string with length :: "
+        LOGGER.info("Random string with length :: "
                 + length + " is :: " + randomString);
         return randomString;
     }
@@ -94,7 +98,7 @@ public class Util {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat(format);
         String formattedDate = formatter.format(date);
-        System.out.println("Date with format :: "
+        LOGGER.info("Date with format :: "
                 + format + " :: " + formattedDate);
         return formattedDate;
     }
@@ -109,7 +113,7 @@ public class Util {
                 "MM/dd/yyyy HH:mm:ss");
         String date = formatter.format(currentDate.getTime()).replace("/", "_");
         date = date.replace(":", "_");
-        System.out.println("Date and Time :: " + date);
+        LOGGER.info("Date and Time :: " + date);
         return date;
     }
 
@@ -121,15 +125,15 @@ public class Util {
      */
     public static boolean verifyTextContains(String actualText, String expText) {
         if (actualText.toLowerCase().contains(expText.toLowerCase())){
-            System.out.println("Actual Text From Web Application UI   --> : "+ actualText);
-            System.out.println("Expected Text From Web Application UI --> : "+ expText);
-            System.out.println("### Verification Contains !!!");
+            LOGGER.info("Actual Text From Web Application UI   --> : "+ actualText);
+            LOGGER.info("Expected Text From Web Application UI --> : "+ expText);
+            LOGGER.info("### Verification Contains !!!");
             return true;
         }
         else{
-            System.out.println("Actual Text From Web Application UI   --> : "+ actualText);
-            System.out.println("Expected Text From Web Application UI --> : "+ expText);
-            System.out.println("### Verification DOES NOT Contains !!!");
+            LOGGER.info("Actual Text From Web Application UI   --> : "+ actualText);
+            LOGGER.info("Expected Text From Web Application UI --> : "+ expText);
+            LOGGER.error("### Verification DOES NOT Contains !!!");
             return false;
         }
 
@@ -143,14 +147,14 @@ public class Util {
      */
     public static boolean verifyTextMatch(String actualText, String expText) {
         if (actualText.equals(expText)){
-            System.out.println("Actual Text From Web Application UI   --> : "+ actualText);
-            System.out.println("Expected Text From Web Application UI --> : "+ expText);
-            System.out.println("### Verification MATCHED !!!");
+            LOGGER.info("Actual Text From Web Application UI   --> : "+ actualText);
+            LOGGER.info("Expected Text From Web Application UI --> : "+ expText);
+            LOGGER.info("### Verification MATCHED !!!");
             return true;
         }else{
-            System.out.println("Actual Text From Web Application UI   --> : "+ actualText);
-            System.out.println("Expected Text From Web Application UI --> : "+ expText);
-            System.out.println("### Verification DOES NOT MATCH !!!");
+            LOGGER.info("Actual Text From Web Application UI   --> : "+ actualText);
+            LOGGER.info("Expected Text From Web Application UI --> : "+ expText);
+            LOGGER.error("### Verification DOES NOT MATCH !!!");
             return false;
         }
     }
@@ -168,7 +172,7 @@ public class Util {
                 return false;
             }
         }
-        System.out.println("Actual List Contains Expected List !!!");
+        LOGGER.info("Actual List Contains Expected List !!!");
         return true;
     }
 
@@ -188,11 +192,11 @@ public class Util {
         expList.removeAll(actList);
         found = expList.isEmpty();
         if (found) {
-            System.out.println("Actual List Matches Expected List !!!");
+            LOGGER.info("Actual List Matches Expected List !!!");
             return true;
         }
         else {
-            System.out.println("Actual List DOES NOT Match Expected List !!!");
+            LOGGER.error("Actual List DOES NOT Match Expected List !!!");
             return false;
         }
     }
@@ -207,11 +211,11 @@ public class Util {
         int actListSize = actList.size();
         for (int i = 0; i < actListSize; i++) {
             if (!actList.contains(item)) {
-                System.out.println("Item is NOT present in List !!!");
+                LOGGER.error("Item is NOT present in List !!!");
                 return false;
             }
         }
-        System.out.println("Item is present in List !!!");
+        LOGGER.info("Item is present in List !!!");
         return true;
     }
 
@@ -256,7 +260,7 @@ public class Util {
             OutputStream out = new FileOutputStream(configPath);
             prop.store(out,"");
         }catch (IOException e){
-            e.printStackTrace();
+            LOGGER.error(e);
         }
     }
     public static String getConfigParameter(String parameterName){
@@ -266,7 +270,7 @@ public class Util {
             fileIn = new FileInputStream(configPath);
             prop.load(fileIn);
         } catch (IOException e){
-            e.printStackTrace();
+            LOGGER.error(e);
         }
         return prop.getProperty(parameterName);
     }

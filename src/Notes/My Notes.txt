@@ -33,3 +33,19 @@
                     The sheetName(or testMethod Name) can be Testcase ID as well
                     The filename must be TestData.xlsx
                     The return type of the dataProvider is Object
+
+8) Log4j for logging
+    Add log4j dependency log4j-api and log4j core
+    Log4j has 5 major type of log statements
+        trace
+        debug -> Selenium webdriver actions like send keys, click, etc.
+        info -> Successful actions like page loaded successfully, verification done successfully, etc
+        error -> to be used when there is an error like element not found, element not clickable, etc.
+        fatal
+
+        we will mostly combine the debug and info as info.
+
+        Log4jxml has
+            logger - class in log4j package. Have to initialize the class. Provides factory method to get the object.
+            appender - Write messages into file, console, etc.
+            layout - the format in which the log must be printed.
