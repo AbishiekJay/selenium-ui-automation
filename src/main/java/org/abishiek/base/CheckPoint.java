@@ -1,10 +1,13 @@
 package org.abishiek.base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CheckPoint {
+    private static final Logger LOGGER = LogManager.getLogger(CheckPoint.class.getName());
     public static HashMap<String, String> resultMap = new HashMap<>();
     private static String PASS = "PASS";
     private static String FAIL = "FAIL";
@@ -13,7 +16,7 @@ public class CheckPoint {
      * Clears the results hash map
      */
     public static void clearHashMap() {
-        System.out.print("Clearing Results Hash Map");
+        LOGGER.info("Clearing Results Hash Map");
         resultMap.clear();
     }
 
@@ -24,7 +27,7 @@ public class CheckPoint {
      */
     private static void setStatus(String mapKey, String status) {
         resultMap.put(mapKey, status);
-        System.out.println(mapKey + " :-> " + resultMap.get(mapKey));
+        LOGGER.info(mapKey + " :-> " + resultMap.get(mapKey));
     }
 
     /**
@@ -44,8 +47,8 @@ public class CheckPoint {
                 setStatus(mapKey, FAIL);
             }
         } catch (Exception e) {
-            System.out.println("Exception Occurred...");
             setStatus(mapKey, FAIL);
+            LOGGER.error("Exception Occurred...", e);
             e.printStackTrace();
         }
     }
@@ -69,7 +72,7 @@ public class CheckPoint {
                 setStatus(mapKey, FAIL);
             }
         } catch (Exception e) {
-            System.out.println("Exception Occurred...");
+            LOGGER.error("Exception Occurred...");
             setStatus(mapKey, FAIL);
             e.printStackTrace();
         }
@@ -82,10 +85,10 @@ public class CheckPoint {
 
         for (int i = 0; i < resultList.size(); i++) {
             if (resultList.contains(FAIL)) {
-                System.out.println("Test Method Failed");
+                LOGGER.error("Test Method Failed");
                 Assert.fail();
             } else {
-                System.out.println("Test Method Successful");
+                LOGGER.info("Test Method Successful");
                 Assert.assertTrue(true);
             }
         }
