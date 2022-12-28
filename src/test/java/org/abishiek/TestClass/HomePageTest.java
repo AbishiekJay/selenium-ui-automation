@@ -3,7 +3,7 @@ package org.abishiek.TestClass;
 import org.abishiek.base.BaseTest;
 import org.abishiek.dataProvider.DataProviderClass;
 import org.abishiek.page.HomePage;
-import org.abishiek.page.SideMenu;
+import org.abishiek.page.SideMenu.SideMenuPage;
 import org.abishiek.utilities.Util;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -35,7 +35,7 @@ public class HomePageTest extends BaseTest {
     }
     @Test(testName = "TC00003" , priority = 3, dataProvider = "excelData")
     public void checkSideMenu(Map<String,String> data){
-        SideMenu menu = new SideMenu(driver);
+        SideMenuPage menu = new SideMenuPage(driver);
         List<String> sideMenuList = new ArrayList<>(data.values());
         menu.checkSideMenuOptions(sideMenuList);
     }

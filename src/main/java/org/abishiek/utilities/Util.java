@@ -275,4 +275,12 @@ public class Util {
         return prop.getProperty(parameterName);
     }
 
+    public static String getReportName() {
+        String localDateTime = getCurrentDateTime();
+        StringBuilder name = new StringBuilder()
+                                .append("AutomationReport")
+                                .append(localDateTime)
+                                .append(".html");
+        return name.toString();
+    }
 }
