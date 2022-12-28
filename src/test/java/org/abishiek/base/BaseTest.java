@@ -48,10 +48,6 @@ public class BaseTest {
    public void startReport(Method method){
         String testName = method.getAnnotation(Test.class).testName();
         LOGGER.info("========== The test for " + testName + " has begun ==========");
-        methodSetup();
-    }
-
-    public static void methodSetup(){
         CheckPoint.clearHashMap();
     }
 

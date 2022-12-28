@@ -11,6 +11,7 @@ import java.time.Duration;
 
 public class WebDriverFactory {
     private static final WebDriverFactory instance = new WebDriverFactory();
+    private static ThreadLocal<String> threadedBrowser = new ThreadLocal<String>();
     private WebDriverFactory(){
 
     }
@@ -20,6 +21,7 @@ public class WebDriverFactory {
     private static ThreadLocal<WebDriver> threadedDriver = new ThreadLocal<>();
     public WebDriver getDriver(String browser){
         WebDriver driver;
+        threadedBrowser.set(browser);
         if(threadedDriver.get()==null){
             try{
                 if(browser.equalsIgnoreCase("chrome")){
@@ -38,6 +40,9 @@ public class WebDriverFactory {
             threadedDriver.get().manage().window().maximize();
         }
         return threadedDriver.get();
+    }
+    public String getBrowser(){
+        return threadedBrowser.get();
     }
     public void quitDriver(){
         threadedDriver.get().quit();

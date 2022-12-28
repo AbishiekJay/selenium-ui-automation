@@ -1,4 +1,4 @@
-package org.abishiek.page;
+package org.abishiek.page.SideMenu;
 
 import org.abishiek.base.CheckPoint;
 import org.abishiek.base.CustomDriver;
@@ -9,13 +9,13 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SideMenu extends CustomDriver {
+public class SideMenuPage extends CustomDriver {
     public WebDriver driver;
     private String SIDEMENU_ITEMS = "xpath=>//li[@class='oxd-main-menu-item-wrapper']/child::a/child::span";
     private String SIDEMENU_COLLAPSE = "xpath=>//i[contains(@class,'bi-chevron-left')]";
     private String SIDEMENU_EXPAND = "xpath=>//i[contains(@class,'bi-chevron-left')]";
 
-    public SideMenu(WebDriver driver) {
+    public SideMenuPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
     }
